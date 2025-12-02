@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# QR Code Scanner - Simplified
+
+A privacy-first, browser-based QR code scanner built with Next.js. This is a simplified extraction of the QR scanning functionality from Prismio.
+
+## Features
+
+- **100% Privacy-First**: All QR code processing happens entirely in your browser - no data is sent to any server
+- **Advanced Image Processing**: Multiple preprocessing strategies (7 different methods) to detect QR codes even in poor lighting conditions
+- **Smart Content Detection**: Automatically detects and formats various QR code types:
+  - URLs
+  - Email addresses
+  - Phone numbers
+  - vCards (contact information)
+  - WiFi credentials
+  - GPS locations
+  - SMS messages
+  - Plain text
+
+- **User-Friendly Interface**: 
+  - Drag-and-drop file upload
+  - Real-time progress tracking
+  - Responsive design
+  - Accessible (ARIA labels, keyboard navigation)
+
+## Tech Stack
+
+- **Next.js 15** - React framework with App Router
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
+- **jsQR** - QR code detection library
+- **Lucide React** - Icons
+- **Headless UI** - Accessible UI components
 
 ## Getting Started
 
-First, run the development server:
+### Installation
+
+```bash
+npm install
+```
+
+### Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## How It Works
 
-To learn more about Next.js, take a look at the following resources:
+1. **Upload**: Users upload a QR code image (PNG, JPG, GIF, up to 10MB)
+2. **Processing**: The image goes through 7 different preprocessing strategies:
+   - Direct Detection
+   - Enhanced Contrast
+   - Adaptive Histogram
+   - Binary Threshold
+   - Sharpening
+   - Color Inversion
+   - Morphological Operations
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Detection**: Each strategy attempts to detect the QR code using jsQR
+4. **Parsing**: Once detected, the content is intelligently parsed based on type
+5. **Display**: Results are shown with appropriate formatting and copy functionality
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
+```
+prismio-simplified/
+├── app/
+│   ├── layout.tsx
+│   └── page.tsx              # Main scanner page
+├── components/
+│   ├── catalyst/
+│   │   └── switch.tsx        # Toggle switch component
+│   └── scanner/
+│       ├── scan-scanner.tsx  # Main scanner component
+│       ├── scan-progress.tsx # Progress indicator
+│       └── scan-result-display.tsx # Results display
+├── lib/
+│   ├── scan-preprocessing.ts # Image processing utilities
+│   └── scan-content-utils.ts # Content parsing utilities
+└── public/
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Key Components
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### ScanScanner
+Main component handling file upload, state management, and orchestrating the scanning process.
+
+### ScanProgress
+Visual feedback during the scanning process showing current strategy and progress percentage.
+
+### ScanResultDisplay
+Intelligently displays QR code content based on type, with copy-to-clipboard functionality and special formatting for vCards.
+
+## License
+
+MIT
+
+## Credits
+
+Extracted from the Prismio project.

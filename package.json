@@ -1,7 +1,8 @@
 {
   "name": "prismio-simplified",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Privacy-first QR code scanner - simplified extraction from Prismio",
+  "private": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,6 +10,10 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.9",
+    "clsx": "^2.1.1",
+    "jsqr": "^1.4.0",
+    "lucide-react": "^0.555.0",
     "next": "16.0.6",
     "react": "19.2.0",
     "react-dom": "19.2.0"
